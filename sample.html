@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Record</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+            background-color: teal;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: teal;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Customer Record</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Type of Room</th>
+                <th>Customer Room</th>
+                <th>Payment Method</th>
+                <th>Check-in Date & Time</th>
+                <th>Check-out Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>123</td>
+                <td>Q123L</td>
+                <td>Onyx</td>
+                <td>09568745615</td>
+                <td>Standard</td>
+                <td>Rm 03</td>
+                <td>Cash</td>
+                <td>07-02-2025</td>
+                <td>08-02-2025</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>M456A</td>
+                <td>Mayen</td>
+                <td>09875687425</td>
+                <td>Deluxe</td>
+                <td>Rm 19</td>
+                <td>Card</td>
+                <td>07-02-2025</td>
+                <td>09-02-2025</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
