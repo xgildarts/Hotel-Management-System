@@ -57,16 +57,3 @@ if($_SERVER["REQUEST_METHOD"] == "GET") {
 
 }
 
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    include "database.php";
-
-    $st = $conn->prepare("SELECT * FROM sda ? ? ? ? ?;");
-    $st->bind_params("sssss", "sd", "sd", "sd", "sd", "sd");
-    
-    if($st->execute($st)) {
-        
-    } else {
-
-    }
-}

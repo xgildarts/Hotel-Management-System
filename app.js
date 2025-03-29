@@ -265,10 +265,8 @@ for(let i = 0; i < roomArray.length; i++) {
             },
             body: JSON.stringify(payload)
         })
-        .then((res) => res.text())
-        .then((val) => console.log(val))
+        .then(() =>  update_room_label())
         .catch((error) => console.error(error));
-        update_room_label();
     });
 }
 
@@ -647,5 +645,5 @@ print_btn.addEventListener("click", (e) => {
 
 
 //------------------------------------------print------------------------------------START-------------------
-
+ 
 //------------------------------------------print------------------------------------END-------------------
