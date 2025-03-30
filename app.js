@@ -9,8 +9,8 @@ let room_number = document.querySelector(".roomNumber");
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    update_room_label();
     checkExpiredRoom();
+    update_room_label();
 });
 
 
@@ -29,7 +29,7 @@ room_number.addEventListener("input", () => {
 });
 
 //---------------------------------Inserting main form data to database -------------------START---------------------------------------------
-document.querySelector(".submit-btn").addEventListener("click", (e) => {
+document.querySelector("form").addEventListener("submit", (e) => {
 
     e.preventDefault();
 
@@ -92,7 +92,7 @@ document.querySelector(".submit-btn").addEventListener("click", (e) => {
         body: JSON.stringify(payload)
     })
     .then((res) => res.json())
-    .then((res) => window.alert(res.status))
+    .then((val) => window.alert(val['status']))
     .catch((err) => console.log(err));
 
     fetch("http://localhost/Hotel%20Management%20System/expiration_date_api.php", {
@@ -103,7 +103,6 @@ document.querySelector(".submit-btn").addEventListener("click", (e) => {
         body: JSON.stringify(payload)
     })
     .then((res) => res.json())
-    .then((res) => window.alert(res.status))
     .catch((err) => console.log(err));
 
     CID.value = "";
@@ -203,28 +202,65 @@ roomLabelArray = [
 ];
 
 
-//Set all the status of room if the webpage is opened at first
-checkExpiredRoom();
-
 //Checking the expired room
 function checkExpiredRoom() {
 
-    const expiredDate = new Date("2025-02-08T08:05:00");
-    const now = new Date();
-
-    if(now >= expiredDate) {
-        console.log("Expired!");
-    } else {
-        console.log("Not Expired Yet!");
-    }
-
+    let now = new Date();
+    console.log(now);
 
     fetch("http://localhost/Hotel%20Management%20System/expiration_date_api.php")
     .then((response) => response.json())
     .then((val) => {
-        let date = val[3] + val[4];
-        console.log(date);
-        console.log(val[1])
+
+        let listOfExpiredDate = [];
+
+        //Find the expired rooms
+        for(let i = 0; i < val.length; i++) {
+            let expiredDate = new Date(`${val[i][4]}T${val[i][3]}`);
+            if(now >= expiredDate) {
+                listOfExpiredDate.push(val[i][1]);
+                console.log('Expired: ' + val[0][0]);
+            } 
+        }
+
+        //Set the status of expired room to available
+        for(let i = 0; i < listOfExpiredDate.length; i++) {
+
+            let payload = {
+                request: "insert",
+                room_number: listOfExpiredDate[i],
+                room_status: "Available"
+            };
+            fetch("http://localhost/Hotel%20Management%20System/customer_room_api.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then((res) => res.text())
+            .then((val) => {
+                console.log(val); update_room_label();
+            }) 
+            .catch((error) => console.log(error));
+        }
+
+        let payload = {
+            room_expired: listOfExpiredDate
+        };
+
+        //Remove the expired room
+        fetch("http://localhost/Hotel Management System/expiration_date_api.php", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"   
+            },
+            body: JSON.stringify(payload)
+        })
+        .then((res) => res.json())
+        .then((val) => {console.log(val); update_room_label();})
+        .catch((error) => console.log(error));
+
     })
     .catch((error) => console.log(error));
 
@@ -246,7 +282,18 @@ function update_room_label() {
             body: JSON.stringify(payload)
         })
         .then((res) => res.json())
-        .then((val) => {roomLabelArray[i].textContent = val[0]})
+        .then((val) => {
+            if(val[0] == "Available") {
+                roomLabelArray[i].textContent = val[0];
+                roomLabelArray[i].style.backgroundColor = "green";
+            } else if(val[0] == "Used") {
+                roomLabelArray[i].textContent = val[0];
+                roomLabelArray[i].style.backgroundColor = "red";
+            } else {
+                roomLabelArray[i].textContent = val[0];
+                roomLabelArray[i].style.backgroundColor = "orange";
+            }
+        })
         .catch((error) => console.error(error));
     }
 }

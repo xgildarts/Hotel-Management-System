@@ -39,7 +39,7 @@
                     <div class="section_1">
                         <div class="row-1">
                             <label for="TID"> Transaction ID: </label>
-                            <input type="text" id="TID" name="TID" placeholder="Transaction ID" required>
+                            <input type="text" id="TID" name="TID" placeholder="Transaction ID" disabled>
                         </div>
     
                         <div class="row-2">
@@ -70,7 +70,7 @@
                     <div class="row-6">
                         <button id="customer-room-btn" name="customer-room-btn">Customer room <span class="drop_down_icon">🔽</span></button>
                         <label for="AR"> Customer Room: </label>
-                        <input class="roomNumber" type="number" min="1" max="20">
+                        <input class="roomNumber" type="number" min="1" max="20" required>
                     </div>
                     
                     <div class="row-7">
@@ -129,8 +129,8 @@
                                 <div class="rooms_container">
                                     <div>
                                         <label for="">RM 05</label>
-                                        <select id="room_5"  disabled selected>
-                                            <option value=""></option>
+                                        <select id="room_5">
+                                            <option value="" disabled selected></option>
                                             <option value="Available">Available</option>
                                             <option value="Used">Used</option>
                                             <option value="Reserved">Reserved</option>
@@ -353,7 +353,7 @@
                         </div>
                     </div>
                     <div class="section_4">
-                        <button class="submit-btn">Submit</button>
+                        <button type="submit" class="submit-btn">Submit</button>
                     </div>
                 </form>
             </div>
