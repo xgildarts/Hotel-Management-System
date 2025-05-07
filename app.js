@@ -324,8 +324,9 @@ for(let i = 0; i < roomArray.length; i++) {
 
 
 
-
-
+//Set initial value and quantity, price
+document.querySelector(".room_quantity").value = 1;
+document.querySelector(".room_price").value = 15000;
 
 
 //---------------------------------------Inserting cash payment method to database-----------START-----------------------------------------------
@@ -453,6 +454,9 @@ roomQuantity.addEventListener("input", () => {
 
 
 //----------------------------------------Inserting card payment method to database--------------START------------------------------------------
+document.querySelector(".room_quantity2").value = 1;
+document.querySelector(".room_price2").value = 15000; 
+
 doneBtn2.addEventListener("click", (e) => {
 
     let card_transaction_id = document.querySelector(".card_transaction_id");
@@ -506,6 +510,8 @@ doneBtn2.addEventListener("click", (e) => {
 
 //Choose whether the selection is Standard or Deluxe
 let option2 = document.querySelector("#option2");
+
+
 option2.addEventListener("change", () => {
     let room_price = document.querySelector(".room_price2");
     if(option2.value == "Standard") {
