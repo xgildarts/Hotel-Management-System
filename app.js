@@ -7,6 +7,9 @@ let doneBtn2 = document.querySelector(".done-btn-2");
 let cardBtn = document.querySelector(".card-btn");
 let room_number = document.querySelector(".roomNumber");
 
+setInterval(() => {
+    update_room_label();
+}, 1000);
 
 document.addEventListener("DOMContentLoaded", () => {
     checkExpiredRoom();
